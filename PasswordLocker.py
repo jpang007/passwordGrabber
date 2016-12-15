@@ -7,6 +7,8 @@
 
 import sys, pyperclip, urllib2
 from itertools import izip
+import re
+import time
 
 from bs4 import BeautifulSoup
 from pprint import pprint
@@ -28,19 +30,32 @@ def passwordUpdate(filename):
 #Code for own document
 #Expand to take in almost any formant?
 def main2(account, filename):
+    start=time.clock()
     dicA = passwordUpdate(filename)
     passwordFind(account, dicA)
 
+    end=time.clock()
+    main2time=end-start
+    print("Personal textfile timing: "+str(main2time)) + " seconds."
+
 #Code for common passwords
 def main(account):
+    start=time.clock()
     #Finds the page that we want to webscrape
     passwordPage = "http://www.passwordrandom.com/most-popular-passwords"
+    nextPage = "/page/" #NEEDED for all pages after the first one
+
+    if (account > 100):
+        relatedPage = int(account) / 100 + 1
+        passwordPage = passwordPage + nextPage + str(relatedPage)
 
     #We know the next X pages are just /page/31
     #We could do it in a for loop for O(n) time but is there a faster way?
+    #Works but it scrapes page by page so scraping 100 pages would be incredibly slow
+    #Why don't we just design the code to realize which page the populatiry # is on
+    #Should be simple as every 100 passwords is on its' corresponding page #
 
     page = urllib2.urlopen(passwordPage)
-
     #The acutal BS code
     soup = BeautifulSoup(page, "html.parser")
     all_tables=soup.find_all('table')
@@ -53,6 +68,10 @@ def main(account):
             CommonPasswords = AccountLines[1].getText()
             d[AccNum] = CommonPasswords
     passwordFind(account, d)
+
+    end=time.clock()
+    maintime=end-start
+    print("Common passwords timing: "+str(maintime)) + " seconds."
 
 if __name__ == '__main__':
     print "Would you like to use the default list of passwords or your own?"
