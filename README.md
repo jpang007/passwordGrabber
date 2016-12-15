@@ -10,7 +10,6 @@ DISCLAIMER: I realize that this project (if finished) could be used to break int
 * Ability to use ones' own password list or http://www.passwordrandom.com/most-popular-passwords/ (default)
 * Select a password based off a dictionary key or popularity (if using the default) 
 * If interested, can run obtained password against a Facebook login
-<hr>
 
 <h1> Documentation </h1>
 <hr>
@@ -27,7 +26,6 @@ This program can also check if the password you want to use (either from the mos
 2. BeautifulSoup
 3. Twill
 4. lxml (for Twill)
-<hr>
 
 <h1> Tasklist </h1>
 <hr>
