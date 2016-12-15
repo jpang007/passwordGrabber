@@ -8,9 +8,6 @@
 import sys, pyperclip, urllib2
 from itertools import izip
 
-passwordPage = "http://www.passwordrandom.com/most-popular-passwords"
-page = urllib2.urlopen(passwordPage)
-
 from bs4 import BeautifulSoup
 from pprint import pprint
 
@@ -28,8 +25,23 @@ def passwordUpdate(filename):
            (key, val) = line.split()
            d[key] = val
     return d
+#Code for own document
+#Expand to take in almost any formant?
+def main2(account, filename):
+    dicA = passwordUpdate(filename)
+    passwordFind(account, dicA)
 
-def main(account, filename):
+#Code for common passwords
+def main(account):
+    #Finds the page that we want to webscrape
+    passwordPage = "http://www.passwordrandom.com/most-popular-passwords"
+
+    #We know the next X pages are just /page/31
+    #We could do it in a for loop for O(n) time but is there a faster way?
+
+    page = urllib2.urlopen(passwordPage)
+
+    #The acutal BS code
     soup = BeautifulSoup(page, "html.parser")
     all_tables=soup.find_all('table')
     right_table=soup.find('table', class_='table')
@@ -40,20 +52,13 @@ def main(account, filename):
             AccNum = AccountLines[0].getText()
             CommonPasswords = AccountLines[1].getText()
             d[AccNum] = CommonPasswords
+    passwordFind(account, d)
 
-    dicA = passwordUpdate(filename)
-
+if __name__ == '__main__':
     print "Would you like to use the default list of passwords or your own?"
     print "(type default or own)"
     string = raw_input('Enter your input: ')
     if (string == "default"):
-        passwordFind(account, d)
+        main(sys.argv[1])
     elif (string == "own"):
-        passwordFind(account, dicA)
-
-if __name__ == '__main__':
-
-    if len(sys.argv) < 3:
-        print('Usage: py pw.py [account] [filename] - copy account password')
-        quit(1)
-    main(sys.argv[1],sys.argv[2])
+        main2(sys.argv[1],sys.argv[2])
