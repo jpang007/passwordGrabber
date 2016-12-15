@@ -10,8 +10,6 @@ import sys, pyperclip, urllib2
 from itertools import izip
 import re
 import time
-from lxml import html
-import requests
 from bs4 import BeautifulSoup
 from pprint import pprint
 from twill.commands import *
@@ -33,7 +31,7 @@ def loginToSite(passwords):
 def passwordFind(account, Passwords):
     if account in Passwords:
         pyperclip.copy(Passwords[account])
-        print('Password for ' + account + ' copied to clipboard.')
+        print('Password key value number/name ' + account + ' copied to clipboard.')
     else:
         print('There is no account named ' + account)
     return Passwords[account]
@@ -65,7 +63,14 @@ def main2(account, filename):
     dicA = passwordUpdate(filename)
     passwordAttempt = passwordFind(account, dicA)
 
-    loginToSite(passwordAttempt)
+    print "Password copied successfully! Would you like to try to run it against a Facebook login? (yes or no)"
+    yesOrNo = raw_input()
+    if yesOrNo == "yes":
+        loginToSite(passwordAttempt)
+    elif yesOrNo == "no":
+        print "OK!"
+        quit(1)
+
 
     end=time.clock()
     main2time=end-start
@@ -88,7 +93,13 @@ def main(account):
     page = urllib2.urlopen(passwordPage)
 
     passwordString = yummySoup(account, page)
-    loginToSite(passwordString)
+    print "Would you like to try to run it against a Facebook login? (yes or no)"
+    yesOrNo = raw_input()
+    if yesOrNo == "yes":
+        loginToSite(passwordString)
+    elif yesOrNo == "no":
+        print "OK!"
+        quit(1)
 
     end=time.clock()
     maintime=end-start
