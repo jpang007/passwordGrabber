@@ -11,6 +11,8 @@ Personal project I am working on, started off by modifying a short existing code
 
 Then I further modified the code to accept any popularity number (e.g #456), my code then calculated what page this would be on and webscraped the according page. I originally wanted to just store a database of all the passwords, then find which one, however it would take way too long (Almost 10 seconds to webscrape just the top 1000!). 
 
+This program will also check if the password you want to use (either from the most common or a personal list), is someones' password at https://www.facebook.com. Of course, you should only be using this to try and get into your own account. As of right now the program will return the info gathered, if the site url is just https://www.facebook.com you know the email/password combination is valid. Otherwise you will see https://www.facebook.com/login.php?login_attempt=1&lwv=110. 
+
 Currently using Twill to attempt to log onto https://www.facebook.com, want to expand by allowing code to read lxml to quickly grab the set of passwords from http://www.passwordrandom.com/most-popular-passwords/. Currently having issues since using BeautifulSoup takes too much time. (Moving this to it's own project the AutoLogger)
 <hr>
 
