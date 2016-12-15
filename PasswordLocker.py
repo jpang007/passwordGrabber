@@ -45,15 +45,12 @@ def main(account):
     passwordPage = "http://www.passwordrandom.com/most-popular-passwords"
     nextPage = "/page/" #NEEDED for all pages after the first one
 
-    if (account > 100):
-        relatedPage = int(account) / 100 + 1
+    if (int(account) > 100):
+        if (int(account) % 100 == 0):
+            relatedPage = int(account) / 100
+        else:
+            relatedPage = int(account) / 100 + 1
         passwordPage = passwordPage + nextPage + str(relatedPage)
-
-    #We know the next X pages are just /page/31
-    #We could do it in a for loop for O(n) time but is there a faster way?
-    #Works but it scrapes page by page so scraping 100 pages would be incredibly slow
-    #Why don't we just design the code to realize which page the populatiry # is on
-    #Should be simple as every 100 passwords is on its' corresponding page #
 
     page = urllib2.urlopen(passwordPage)
     #The acutal BS code
