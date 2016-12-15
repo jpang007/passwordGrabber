@@ -1,7 +1,7 @@
-# passwordLocker & AutoLogger
+# passwordLocker
 Goals for this project: 
 * Demonstrate my interest in cybersecurity
-* Develop a potential AutoLogger 
+* Develop a potential LoginChecker 
 
 DISCLAIMER: I realize that this project (if finished) could be used to break into peoples' accounts. I just want to demonstrate my knowledge and develop skills in this area NOT for illegal purposes. This should only be for testing purposes and can only be used where strict consent has been given.
 
@@ -11,7 +11,7 @@ Personal project I am working on, started off by modifying a short existing code
 
 Then I further modified the code to accept any popularity number (e.g #456), my code then calculated what page this would be on and webscraped the according page. I originally wanted to just store a database of all the passwords, then find which one, however it would take way too long (Almost 10 seconds to webscrape just the top 1000!). 
 
-Currently using Twill to attempt to log onto https://www.facebook.com, want to expand by allowing code to read lxml to quickly grab the set of passwords from http://www.passwordrandom.com/most-popular-passwords/. Currently having issues since using BeautifulSoup takes too much time. 
+Currently using Twill to attempt to log onto https://www.facebook.com, want to expand by allowing code to read lxml to quickly grab the set of passwords from http://www.passwordrandom.com/most-popular-passwords/. Currently having issues since using BeautifulSoup takes too much time. (Moving this to it's own project the AutoLogger)
 <hr>
 
 <h1> Tasklist </h1>
@@ -19,4 +19,4 @@ Currently using Twill to attempt to log onto https://www.facebook.com, want to e
 - [x] Extend program to take in dictionary from custom input file
 - [x] Webscraped http://www.passwordrandom.com/most-popular-passwords top 100 passwords
 - [x] Webscrap all 10000 passwords for same functionality (realistically took too long to make a large database)
-- [ ] Implement ability to attempt to login with all passwords stored in database (possible?) 
+- [x] Implement ability to attempt to login with a password stored in database 
