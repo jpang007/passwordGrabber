@@ -23,15 +23,15 @@ def passwordUpdate(filename):
     return d
 
 
-def main(filename, account):
+def main(account, filename):
     dicA = passwordUpdate(filename)
     passwordFind(account, dicA)
 
 if __name__ == '__main__':
     if len(sys.argv) < 3:
-        print('Usage: py pw.py [filename] [account] - copy account password')
+        print('Usage: py pw.py [account] [filename] - copy account password')
         quit(1)
     if len(sys.argv[1]) < 2:
-        print('Usage: py pw.py [filename] [account] - copy account password')
+        print('Usage: py pw.py [account] [filename] - copy account password')
         quit(1)
-    main(sys.argv[2],sys.argv[1])
+    main(sys.argv[1],sys.argv[2])
