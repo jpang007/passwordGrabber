@@ -5,7 +5,7 @@ Goals for this project:
 
 DISCLAIMER: I realize that this project (if finished) could be used to break into peoples' accounts. I just want to demonstrate my knowledge and develop skills in this area NOT for illegal purposes. This should only be for testing purposes and can only be used where strict consent has been given.
  <hr>
-<h1> Features <h1>
+<h1> Features </h1>
 * Ability to use ones' own password list or http://www.passwordrandom.com/most-popular-passwords/ (default)
 * Select a password based off a dictionary key or popularity (if using the default) 
 * If interested, can run obtained password against a Facebook login
