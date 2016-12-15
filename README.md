@@ -1,6 +1,6 @@
 # passwordLocker & AutoLogger
 Goals for this project: 
-* Demonstrate how my interest in cybersecurity
+* Demonstrate my interest in cybersecurity
 * Develop a potential AutoLogger 
 
 DISCLAIMER: I realize that this project (if finished) could be used to break into peoples' accounts. I just want to demonstrate my knowledge and develop skills in this area NOT for illegal purposes. This should only be for testing purposes and can only be used where strict consent has been given.
