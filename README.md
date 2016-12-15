@@ -1,4 +1,4 @@
-# passwordLocker
+# passwordLocker & LoginChecker
 Goals for this project: 
 * Demonstrate my interest in cybersecurity
 * Develop a potential LoginChecker 
