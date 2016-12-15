@@ -21,7 +21,7 @@ Then I further modified the code to accept any popularity number (e.g #456), my 
 This program can also check if the password you want to use (either from the most common or a personal list), is someones' password at https://www.facebook.com. Of course, you should only be using this to try and get into your own account. As of right now the program will return the info gathered, if the site url is just https://www.facebook.com you know the email/password combination is valid. Otherwise you will see https://www.facebook.com/login.php?login_attempt=1&lwv=110. 
 <hr>
 
-<h1> Needed For Installation </h1> 
+<h1> Need to install to run </h1> 
 <hr>
 1. Pyperclip
 2. BeautifulSoup
