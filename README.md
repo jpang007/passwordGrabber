@@ -38,4 +38,4 @@ own textfie: python passwordLocker.py [account number] [textfile]
 - [x] Webscraped http://www.passwordrandom.com/most-popular-passwords top 100 passwords
 - [x] Webscrap all 10000 passwords for same functionality (realistically took too long to make a large database)
 - [x] Implement ability to attempt to login with a password stored in database 
-- [ ] Expand program to convert a list of passwords to dictionary format (so user can feed it just a text file of just passwords)
+- [x] Expand program to convert a list of passwords to dictionary format (so user can feed it just a text file of just passwords)
