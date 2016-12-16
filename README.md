@@ -8,7 +8,7 @@ DISCLAIMER: I realize that this project (if finished) could be used to break int
 <h1> Features </h1>
 <hr>
 * Ability to use ones' own password list or http://www.passwordrandom.com/most-popular-passwords/ (default)
-* Select a password based off a dictionary key or popularity (if using the default) 
+* Select a password based off a dictionary key or popularity (if using the default), then copies said password to clipboard
 * If interested, can run obtained password against a Facebook login
 
 <h1> Documentation </h1>
