@@ -30,6 +30,7 @@ This program can also check if the password you want to use (either from the mos
 <h1> How to run </h1>
 <hr>
 default most common passwords: python passwordLocker.py [int of popularity number]
+
 own textfie: python passwordLocker.py [account number] [textfile]
 
 <h1> Tasklist </h1>
