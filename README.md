@@ -5,6 +5,8 @@ Goals for this project:
 
 DISCLAIMER: I realize that this project can be used to break into peoples' accounts. I just want to demonstrate my knowledge and develop skills in this area NOT for illegal purposes. This should only be for testing purposes and can only be used where strict consent has been given.
 
+For a more in-depth explanation why I made this, go to documentation.md. 
+
 <h1> Features </h1>
 <hr>
 * Ability to use ones' own password list or http://www.passwordrandom.com/most-popular-passwords/ (default)
