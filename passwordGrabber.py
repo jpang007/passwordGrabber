@@ -1,5 +1,5 @@
 #! python3
-# pw.py - An insecure password locker program.
+# passwordGrabber.py - An insecure password locker program.
 # Extend program to take in dictionary from custom input File check
 # Extend program to take the most commonly used Passwords,
 # & write to to a file so we can grab whichever number we want in popularity
